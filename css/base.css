@@ -286,7 +286,7 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-:;:focus {
+:focus {
 	border-color: rgba(82, 168, 236, 0.8);
 	outline: 0;
 	outline: thin dotted \9;
@@ -364,4 +364,73 @@ textarea {
 
 .margin1 ul {
 	position: absolute;
+}
+
+.select {
+	width: 100px;
+	margin: 0 auto;
+}
+.select p{
+	margin: 10px 0;
+}
+input+label{
+	margin-left: 5px;
+}
+.ss{
+	width: 200px;
+	margin: 0 auto;
+}
+.ss h5{
+	margin-left: 5px;
+	float: left;
+}
+.ds{
+	width: 210px;
+	margin: 0 auto;
+}
+.ds a:hover{
+	color: darkorange;
+}
+.ii input{
+	width: 160px;
+	margin-right: 10px;
+}
+.sd{
+	margin-top: 15px;
+}
+.sd select{
+	margin-right: 10px;
+}
+.menu{
+	width: 400px;
+	margin: 0 auto;
+}
+.menu span select{
+	width: 150px;
+	margin-right: 30px;
+	margin-top: 20px;
+}
+.ccc{
+	width: 150px;
+	margin: 0 auto;
+	position: relative;
+}
+/*
+ *  通过 绝对定位以及z-index将select和input 改装成像整体一般；
+ */
+#sel{
+	position: absolute;
+	width: 125px;
+	height: 25px;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+#inp{
+	position: absolute;
+	width: 100px;
+	height: 25px;
+}
+#ul{
+	left: 150px;
 }
