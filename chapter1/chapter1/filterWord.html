@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文本内容进行关键字过滤</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"media="all"/>
+	</head>
+	<body>
+		<div class="demo1">
+			<form class="form-horizontal user-input" id="form" role="form">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="bz">备注</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" name="" id="bz" maxlength="50" placeholder="周杰伦|信|黎明  将会被过滤" rows="10" cols="47"></textarea>				
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="button" id="btn" class="btn btn-primary btn-block">过  滤</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="bz2">备注</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" rows="10" cols="47" id="bz2"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			(function(){
+				var bz = document.getElementById("bz");
+				var bz2 = document.getElementById("bz2");
+				var btn = document.getElementById("btn");
+				
+				btn.onclick = function(){
+					
+					bz2.value = bz.value.replace(/周杰伦|信|黎明/g,function(word){
+						var r = "";
+						for (i = 0; i < word.length; i++) {
+							r += "*";
+						}
+						console.log(word);
+						return r;                 
+						// a.replace(b,c)第二个参数c可以是函数，c的参数是所匹配到的值，函数的返回值便是替换值
+					});
+				}
+			}())
+		</script>
+	</body>
+</html>

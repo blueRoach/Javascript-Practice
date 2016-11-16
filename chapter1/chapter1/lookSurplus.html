@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>仿微博剩余字数显示</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	</head>
+	<body>
+		<div class="demo1">
+			<form class="form-horizontal user-input" id="form" role="form">
+				<div class="form-group">
+					<div class="col-sm-10">
+						<textarea class="from-control" placeholder="备注" cols="47" rows="10" maxlength="140"></textarea>
+						<div class="lsn">
+							<p>还可以输入<i class="red">140</i>个字</p>
+						</div>
+					</div>
+				</div>		
+				<div class="form-group">
+					<div class="col-sm-10">
+						<button type="button" id="btn" class="btn btn-primary btn-block">提  交</button>
+					</div>	
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">  //未实现当字数减少时，提示框消失；
+			(function(){
+				var form = document.getElementById("form");
+				var num = form.getElementsByClassName("red")[0];
+				var textarea = form.getElementsByTagName("textarea");
+				var surplus = form.getElementsByClassName("red")[0];
+				var oBtn = document.getElementById("btn");
+				
+				for(i = 0; i < textarea.length; i++){
+					textarea[i].oninput = function(){    
+						// oninput 当用户尝试在input里输入时触发 等同于onkeydown+onkeyup
+						surplus.innerHTML = 140 - this.value.length;
+						checkOver();
+					}
+				}
+				
+				function checkOver(){
+					for (i = 0; i<textarea.length; i++) {
+						if(textarea[i].value.length >= 140){
+							error(textarea[i], "超了超了");
+							textarea[i].className.indexOf("error") == -1 && (textarea[i].className += "error");
+							oBtn.onclick = function(){
+								return false;
+							}
+						}
+					}
+				}
+				function error(o, txt, show){
+					if(arguments.length == 3 && show){
+						o.tip && (o.tip.style.display == "none");
+					} else {
+						if(o.className.search(/error/) == -1){
+							o.tip = over(o, txt);
+							o.tip.style.display = "block";
+						} else {
+							o.tip.style.display = "block";
+						}
+					}
+				}
+				function over(o, txt){
+					var pop = div("popover right");
+					var content = div("popover-content");
+					var arr = div("arrow");
+					
+					content.appendChild(div("", txt));
+					pop.appendChild(content);
+					pop.appendChild(arr);					
+					o.parentNode.insertBefore(pop, o.nextSibling);
+					
+					return pop;
+					
+				}
+				function div(cls, txt){
+					var d = document.createElement("div");
+					d.className = cls;
+					txt && (d.innerHTML = txt);
+					return d;
+				}
+			}())
+		</script>
+	</body>
+</html>

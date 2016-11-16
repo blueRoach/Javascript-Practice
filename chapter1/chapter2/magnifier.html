@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片放大镜效果</title>
+		<link rel="stylesheet" type="text/css" href="../css/base2.css" media="all"/>
+	</head>
+	<body>
+		<div class="demo2">
+			<div id="frame">
+				<img src="../img/xy.jpg" alt="zxy"/>
+				<div id="box"></div>
+			</div>
+			<div id="frame2">
+				<img src="../img/xy_large.jpg" id="large" alt="zxy" />
+			</div>
+		</div>
+		<script type="text/javascript">
+			(function(){
+				var ff = document.getElementById("frame");
+				var box = document.getElementById("box");
+				var ff2 = document.getElementById("frame2")
+				var large = document.getElementById("large");
+				
+				ff.onmousemove = function(event){
+					box.style.display = ff2.style.display = "block";
+					ff.style.cursor = "move";
+					var n = ff2.clientWidth / box.clientHeight ;     
+					// n 为原图与放大图之间的倍数， 用于放大图的移动距离计算
+					var l = document.documentElement.scrollLeft || document.body.scrollLeft;  //获取页面滚动距离
+					var t = document.documentElement.scrollTop || document.body.scrollTop;
+					var e = event || window.event;   //  获取event对象
+					var x = e.clientX + l - ff.offsetLeft - box.clientWidth / 2;    
+					var y = e.clientY + t - ff.offsetTop - box.clientWidth / 2;
+					// box左边，上边距离ff的top与left值
+					
+					if(x <= 0){
+						x = 0;
+					} else if(x >= ff.clientWidth - box.clientWidth) {
+						x = ff.clientWidth - box.clientWidth;						
+					}   // 当box要出 ff时 限制他的left值；
+					if(y <= 0){
+						y = 0;
+					} else if(y >= ff.clientHeight - box.clientHeight) {
+						y = ff.clientHeight - box.clientHeight;
+					}		
+					box.style.left = x + "px";
+					box.style.top = y + "px";
+					large.style.left = -n * x +"px";
+					large.style.top = -n * y + "px";
+				}		
+				ff.onmouseout = function(){
+					box.style.display = ff2.style.display = "none"
+				}			
+			}())
+		</script>
+	</body>
+</html>

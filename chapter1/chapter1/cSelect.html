@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>可添加的下拉框</title>
+		<link rel="stylesheet" type="text/css" href="../css/base.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" media="all"/>
+	</head>
+	<body>
+		<div class="demo1">
+			<div class="ccc">
+				<input id="inp" />
+				<select id="sel"></select>
+			</div>
+		</div>
+		<script type="text/javascript">
+			(function(){
+				var inp = document.getElementById("inp");
+				var sel = document.getElementById("sel");
+				
+				console.log(sel)
+				inp.onkeyup = function(e){
+					e = e || window.event;
+					var code = e.keyCode || e.charCode;
+					if(code == 13){
+						create(sel,this.value);
+						this.value = "";
+					}
+					console.log(this.value)
+				}
+				function create(item,val){
+					var option = document.createElement("option");
+					option.value = val;
+					option.innerHTML = val;
+					console.log(option)
+					item.appendChild(option);
+				}
+			}())
+		</script>
+	</body>
+</html>

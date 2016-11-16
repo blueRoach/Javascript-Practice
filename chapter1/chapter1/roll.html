@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文字自动滚动</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/base.css"/>
+	</head>
+	<body>
+		<div class="demo1">
+			<h3>文本框中文字自动滚动</h3>
+			<div class="margin1">
+				<ul>
+					<li>床前明月光</li>
+					<li>疑似地上霜</li>
+					<li>举头望明月</li>
+					<li>低头思故乡</li>
+					<li>床前明月光</li>
+					<li>疑似地上霜</li>
+					<li>举头望明月</li>
+					<li>低头思故乡</li>
+					<li>床前明月光</li>
+					<li>疑似地上霜</li>
+					<li>举头望明月</li>
+					<li>低头思故乡</li>
+					<li>床前明月光</li>
+					<li>疑似地上霜</li>
+					<li>举头望明月</li>
+					<li>低头思故乡</li>
+				</ul>
+				<ul id="ul">
+					<li>床前明月光</li>
+					<li>疑似地上霜</li>
+					<li>举头望明月</li>
+					<li>低头思故乡</li>
+					<li>床前明月光</li>
+					<li>疑似地上霜</li>
+					<li>举头望明月</li>
+					<li>低头思故乡</li>
+				</ul>
+			</div>
+		
+		</div>
+		<script type="text/javascript">
+			window.onload = function(){
+				var mrg1 = document.getElementsByClassName("margin1")[0];
+				var ul1 = mrg1.getElementsByTagName("ul")[0];
+				var i = 1;
+				setInterval(function(){
+					ul1.style.top = (ul1.offsetTop - i) + "px";
+					if(ul1.offsetTop <= -ul1.offsetHeight/2){
+						ul1.style.top = 0 ;
+					}
+				},50)
+				
+				
+				
+				var ul = document.getElementById('ul');
+      			var li = ul.getElementsByTagName('li');
+      			var len = li.length;
+      			function auto(){
+		            act(ul, 'marginTop', -20, function(){
+		                ul.appendChild(ul.children[0]);
+		                ul.style.marginTop = 0;
+		                setTimeout(function(){
+		                    auto();
+		                }, 800);
+		            });
+		        }
+		        auto();
+		        function css(obj, attr){
+		            if(obj.currentStyle){
+		                return obj.currentStyle[attr];
+		            } else {
+		                return getComputedStyle(obj, null)[attr];
+		            }
+		        }
+		        function act(obj, attr, target, fn){
+		            clearInterval(obj.timer);
+		            obj.timer = setInterval(function(){
+		                var cur = parseInt(css(obj, attr));
+		                var speed = (target - cur) / 8;
+		                var stop = true;
+		                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+		                if(target != cur){
+		                    stop = false;
+		                }
+		                obj.style[attr] = speed + cur + 'px';
+		                if(stop){
+		                    clearInterval(obj.timer);
+		                    obj.timer = null;
+		                    fn && fn.call(obj);
+		                }
+		            }, 20);
+		        }
+			}
+		</script>
+	</body>
+</html>
