@@ -1,5 +1,5 @@
 .demo2{
-	width: 500px;
+	width: 400px;
 	margin: 0 auto;
 	margin-top: 100px;
 }
@@ -30,6 +30,7 @@
 	left: 0;
 	top: 0;
 	display:none;
+	position: absolute;
 }
 .bd{
 	width: 400px;
